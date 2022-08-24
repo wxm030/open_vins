@@ -1,7 +1,7 @@
 <launch>
 
     <!-- what config we are going to run (should match folder name) -->
-    <arg name="verbosity"   default="DEBUG" /> <!-- ALL, DEBUG, INFO, WARNING, ERROR, SILENT -->
+    <arg name="verbosity"   default="ALL" /> <!-- ALL, DEBUG, INFO, WARNING, ERROR, SILENT -->
     <arg name="config"      default="airsim" /> <!-- euroc_mav, tum_vi, rpng_aruco -->
     <arg name="config_path" default="$(find ov_msckf)/../config/$(arg config)/estimator_config.yaml" />
 
@@ -10,19 +10,19 @@
     <arg name="use_stereo"  default="true" />
     <arg name="bag_start"   default="0" /> <!-- v1-2: 0, mh1: 40, mh2: 35, mh3: 17.5, mh4-5: 15 -->
     <arg name="bag_rate"    default="1" />
-    <arg name="dataset"     default="V1_01_easy" /> <!-- V1_01_easy, V1_02_medium, V2_02_medium -->
+    <arg name="dataset"     default="2022-08-24-10-59-44" /> <!-- V1_01_easy, V1_02_medium, V2_02_medium -->
     <arg name="dobag"       default="false" /> <!-- if we should play back the bag -->
     <arg name="bag"         default="/media/patrick/RPNG\ FLASH\ 3/$(arg config)/$(arg dataset).bag" />
 
     <!-- saving trajectory path and timing information -->
-    <arg name="dosave"      default="false" />
+    <arg name="dosave"      default="true" />
     <arg name="dotime"      default="false" />
-    <arg name="path_est"    default="/tmp/traj_estimate.txt" />
-    <arg name="path_time"   default="/tmp/traj_timing.txt" />
+    <arg name="path_est"    default="/home/wxm/Documents/codes/openvins_ws/data/traj_estimate.txt" />
+    <arg name="path_time"   default="/home/wxm/Documents/codes/openvins_ws/data/traj_timing.txt" />
 
     <!-- if we should viz the groundtruth -->
     <arg name="dolivetraj"  default="false" />
-    <arg name="path_gt"     default="$(find ov_data)/$(arg config)/$(arg dataset).txt" />
+    <arg name="path_gt"     default="$(find ov_data)/$(arg config)/$(arg dataset).csv" />
 
 
     <!-- MASTER NODE! -->

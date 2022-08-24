@@ -90,7 +90,7 @@ public:
    * @param msg New message
    */
   void callback_odometry(const nav_msgs::OdometryPtr &msg) {
-    timestamp = msg->header.stamp.toSec();
+    timestamp = msg->header.stamp.toNSec();
     q_ItoG << msg->pose.pose.orientation.x, msg->pose.pose.orientation.y, msg->pose.pose.orientation.z, msg->pose.pose.orientation.w;
     p_IinG << msg->pose.pose.position.x, msg->pose.pose.position.y, msg->pose.pose.position.z;
     cov_pos << msg->pose.covariance.at(0), msg->pose.covariance.at(1), msg->pose.covariance.at(2), msg->pose.covariance.at(6),
@@ -108,7 +108,7 @@ public:
    * @param msg New message
    */
   void callback_pose(const geometry_msgs::PoseStampedPtr &msg) {
-    timestamp = msg->header.stamp.toSec();
+    timestamp = msg->header.stamp.toNSec();
     q_ItoG << msg->pose.orientation.x, msg->pose.orientation.y, msg->pose.orientation.z, msg->pose.orientation.w;
     p_IinG << msg->pose.position.x, msg->pose.position.y, msg->pose.position.z;
     write();
@@ -123,7 +123,7 @@ public:
    * @param msg New message
    */
   void callback_posecovariance(const geometry_msgs::PoseWithCovarianceStampedPtr &msg) {
-    timestamp = msg->header.stamp.toSec();
+    timestamp = msg->header.stamp.toNSec();
     q_ItoG << msg->pose.pose.orientation.x, msg->pose.pose.orientation.y, msg->pose.pose.orientation.z, msg->pose.pose.orientation.w;
     p_IinG << msg->pose.pose.position.x, msg->pose.pose.position.y, msg->pose.pose.position.z;
     cov_pos << msg->pose.covariance.at(0), msg->pose.covariance.at(1), msg->pose.covariance.at(2), msg->pose.covariance.at(6),
@@ -141,7 +141,7 @@ public:
    * @param msg New message
    */
   void callback_transform(const geometry_msgs::TransformStampedPtr &msg) {
-    timestamp = msg->header.stamp.toSec();
+    timestamp = msg->header.stamp.toNSec();
     q_ItoG << msg->transform.rotation.x, msg->transform.rotation.y, msg->transform.rotation.z, msg->transform.rotation.w;
     p_IinG << msg->transform.translation.x, msg->transform.translation.y, msg->transform.translation.z;
     write();
@@ -180,7 +180,7 @@ protected:
 
   // Temp storage objects for our pose and its certainty
   bool has_covariance = false;
-  double timestamp;
+  int64_t timestamp;
   Eigen::Vector4d q_ItoG;
   Eigen::Vector3d p_IinG;
   Eigen::Matrix<double, 3, 3> cov_rot;
